@@ -102,19 +102,23 @@ export function Dashboard() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {newlyCurated.map((book) => (
-              <div key={book.id} className="card-premium h-48 flex gap-4 overflow-hidden group">
+              <Link 
+                key={book.id} 
+                to={`/books/${book.id}/edit`}
+                className="card-premium h-48 flex gap-4 overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="w-1/3 overflow-hidden">
                   <img src={book.cover} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" alt={book.title} />
                 </div>
                 <div className="w-2/3 p-4 flex flex-col justify-center">
                   <p className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">{book.category}</p>
-                  <h4 className="font-serif font-bold text-lg leading-tight mb-1 truncate">{book.title}</h4>
+                  <h4 className="font-serif font-bold text-lg leading-tight mb-1 truncate group-hover:text-primary transition-colors">{book.title}</h4>
                   <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{book.author}</p>
                   <div className="bg-secondary/50 text-[10px] font-bold px-2 py-1 rounded w-fit uppercase text-muted-foreground">
                     {book.edition}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
