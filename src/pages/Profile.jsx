@@ -11,11 +11,15 @@ import {
   MoreVertical
 } from "lucide-react";
 import { useLibrary } from "../context/LibraryContext";
+import { useAuth } from "../context/AuthContext";
 import { cn } from "../utils/utils";
 
 export function Profile() {
   const { users, books, transactions } = useLibrary();
-  const user = users[0]; // Primary user for profile view
+  const { user: authUser, isAuthenticated } = useAuth();
+  
+  // Use authenticated user if available, otherwise fallback to the first user in database
+  const user = isAuthenticated ? authUser : users[0]; 
 
   const activeBorrowings = transactions
     .filter(t => t.userId === user.id && t.status !== "Returned")
@@ -54,15 +58,15 @@ export function Profile() {
 
           <div className="w-full grid grid-cols-3 gap-2 px-4 mb-8">
             <div className="flex flex-col items-center">
-              <span className="text-base font-bold">{user.totalLoans}</span>
+              <span className="text-base font-bold">{user?.totalLoans || 0}</span>
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none mt-1 text-center">Total Loans</span>
             </div>
             <div className="flex flex-col items-center border-x border-border/50">
-              <span className="text-base font-bold">{user.activeLimit}</span>
+              <span className="text-base font-bold">{user?.activeLimit || "0/5"}</span>
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none mt-1 text-center">Active Limit</span>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-base font-bold text-emerald-600">{user.rewardPoints.toLocaleString()}</span>
+              <span className="text-base font-bold text-emerald-600">{(user?.rewardPoints || 0).toLocaleString()}</span>
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none mt-1 text-center">Reward Points</span>
             </div>
           </div>

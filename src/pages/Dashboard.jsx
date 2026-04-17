@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Plus, BookOpen, Clock, LayoutGrid, ArrowRight, Users, Check, TrendingUp } from "lucide-react";
 import { useLibrary } from "../context/LibraryContext";
+import { useAuth } from "../context/AuthContext";
 import { formatDistanceToNow } from "date-fns";
 import { StatCard } from "../components/ui/StatCard";
 import { BookForm } from "../components/books/BookForm";
@@ -10,6 +11,7 @@ import { cn } from "../utils/utils";
 
 export function Dashboard() {
   const { stats, transactions, books, users } = useLibrary();
+  const { user } = useAuth();
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
 
   const recentTransactions = [...transactions]
@@ -24,7 +26,9 @@ export function Dashboard() {
       <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
           <h2 className="text-4xl font-serif font-bold text-foreground">Library Overview</h2>
-          <p className="text-muted-foreground mt-1">Welcome back, Administrator. Here's what's happening today.</p>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Welcome back, <span className="text-primary font-bold">{user?.name || "Administrator"}</span>. Here's what's happening today.
+          </p>
         </div>
         
         <div className="flex gap-3">

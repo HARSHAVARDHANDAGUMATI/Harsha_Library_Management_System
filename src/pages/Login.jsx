@@ -120,7 +120,7 @@ export function Login() {
               type="submit"
               className="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all mt-4 group"
             >
-              {isRegister ? "Create Account" : "Access Dashboard"}
+              {isRegister ? "Create Account" : "Login"}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>

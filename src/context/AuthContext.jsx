@@ -26,8 +26,13 @@ export function AuthProvider({ children }) {
     const mockUser = {
       id: "u1",
       name: "Harsha",
-      email: email,
-      role: "Administrator",
+      email: email || "harsha@library.org",
+      role: "Gold Member",
+      isAdmin: true,
+      memberSince: "Oct 2021",
+      totalLoans: 142,
+      activeLimit: "5/10",
+      rewardPoints: 2840,
       avatar: harshaProfile
     };
     setUser(mockUser);
@@ -42,6 +47,10 @@ export function AuthProvider({ children }) {
       name,
       email,
       role: "Member",
+      memberSince: new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" }),
+      totalLoans: 0,
+      activeLimit: "0/5",
+      rewardPoints: 0,
       avatar: harshaProfile
     };
     setUser(mockUser);

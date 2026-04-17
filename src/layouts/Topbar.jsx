@@ -81,7 +81,7 @@ export function Topbar({ onMenuClick }) {
               )}
             </div>
             <span className="hidden sm:inline text-xs font-bold text-foreground">
-              {isAuthenticated ? (user?.name || "Harsha") : "Guest"}
+              {isAuthenticated ? (user?.name || "Administrator") : "Guest"}
             </span>
             <ChevronDown className={`h-3 w-3 text-muted-foreground transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
           </button>
